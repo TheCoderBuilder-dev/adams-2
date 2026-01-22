@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adams Arcade — Kenya's First Shopping Centre</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --white: #ffffff;
+            --off-white: #fafafa;
+            --light-gray: #f5f5f5;
+            --mid-gray: #e0e0e0;
+            --text-gray: #666666;
+            --dark-gray: #333333;
+            --black: #111111;
+            --accent: #8B7355;
+            --accent-light: #a89070;
+            --serif: 'Cormorant Garamond', Georgia, serif;
+            --sans: 'Inter', -apple-system, sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--sans);
+            background: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s;
+        }
+
+        .nav.scrolled {
+            border-color: var(--mid-gray);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .nav-logo h1 {
+            font-family: var(--serif);
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+        }
+
+        .nav-logo span {
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            color: var(--text-gray);
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-decoration: none;
+            color: var(--dark-gray);
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-cta {
+            padding: 12px 28px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: var(--accent);
+        }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 140px 60px 80px;
+            background: var(--off-white);
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 550px;
+        }
+
+        .hero-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 30px;
+        }
+
+        .hero-title {
+            font-family: var(--serif);
+            font-size: clamp(3rem, 5vw, 4.5rem);
+            font-weight: 400;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+            max-width: 450px;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            padding: 16px 36px;
+            background: var(--black);
+            color: var(--white);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: var(--accent);
+        }
+
+        .btn-secondary {
+            padding: 16px 36px;
+            background: transparent;
+            border: 1px solid var(--dark-gray);
+            color: var(--dark-gray);
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover {
+            background: var(--dark-gray);
+            color: var(--white);
+        }
+
+        .hero-visual {
+            position: relative;
+            height: 600px;
+        }
+
+        .hero-img-main {
+            position: absolute;
+            width: 70%;
+            height: 80%;
+            right: 0;
+            top: 10%;
+            overflow: hidden;
+        }
+
+        .hero-img-main img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-img-accent {
+            position: absolute;
+            width: 45%;
+            height: 50%;
+            left: 0;
+            bottom: 0;
+            overflow: hidden;
+            border: 8px solid var(--off-white);
+        }
+
+        .hero-img-accent img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-badge {
+            position: absolute;
+            top: 0;
+            left: 20%;
+            background: var(--white);
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .hero-badge span {
+            display: block;
+            font-size: 0.6rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-gray);
+        }
+
+        .hero-badge strong {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            color: var(--accent);
+        }
+
+        /* MARQUEE */
+        .marquee {
+            padding: 25px 0;
+            background: var(--black);
+            overflow: hidden;
+        }
+
+        .marquee-track {
+            display: flex;
+            animation: marquee 30s linear infinite;
+        }
+
+        .marquee-item {
+            flex-shrink: 0;
+            padding: 0 60px;
+            font-family: var(--serif);
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--white);
+            opacity: 0.6;
+            display: flex;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .marquee-item::after {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        @keyframes marquee {
+            to { transform: translateX(-50%); }
+        }
+
+        /* ABOUT */
+        .about {
+            padding: 120px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 80px;
+        }
+
+        .about-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .about-intro {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+        }
+
+        .tl-item {
+            padding: 30px;
+            border-top: 1px solid var(--mid-gray);
+            transition: border-color 0.3s;
+        }
+
+        .tl-item:hover {
+            border-color: var(--accent);
+        }
+
+        .tl-year {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .tl-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 10px;
+        }
+
+        .tl-text {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        /* DIRECTORY */
+        .directory {
+            padding: 120px 60px;
+            background: var(--light-gray);
+        }
+
+        .directory-inner {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 4vw, 3.5rem);
+            font-weight: 400;
+        }
+
+        .dir-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 50px;
+        }
+
+        .dir-tab {
+            padding: 14px 28px;
+            background: var(--white);
+            border: none;
+            font-family: var(--sans);
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dir-tab.active,
+        .dir-tab:hover {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .dir-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .dir-card {
+            background: var(--white);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .dir-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .dir-card-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .dir-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .dir-card:hover .dir-card-img img {
+            transform: scale(1.05);
+        }
+
+        .dir-card-body {
+            padding: 25px;
+        }
+
+        .dir-card-tag {
+            font-size: 0.65rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .dir-card-body h3 {
+            font-family: var(--serif);
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 8px;
+        }
+
+        .dir-card-body p {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        /* FEATURES */
+        .features {
+            padding: 120px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 50px;
+        }
+
+        .feature {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--mid-gray);
+            border-radius: 50%;
+            font-size: 1.5rem;
+            color: var(--accent);
+        }
+
+        .feature h3 {
+            font-family: var(--serif);
+            font-size: 1.4rem;
+            font-weight: 400;
+            margin-bottom: 15px;
+        }
+
+        .feature p {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 120px 60px;
+            background: var(--black);
+            text-align: center;
+        }
+
+        .cta-title {
+            font-family: var(--serif);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+            color: var(--white);
+            margin-bottom: 20px;
+        }
+
+        .cta-text {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 40px;
+        }
+
+        .cta .btn-primary {
+            background: var(--accent);
+        }
+
+        .cta .btn-primary:hover {
+            background: var(--accent-light);
+        }
+
+        /* CONTACT */
+        .contact {
+            padding: 120px 60px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contact-info h2 {
+            font-family: var(--serif);
+            font-size: 2.5rem;
+            font-weight: 400;
+            margin-bottom: 30px;
+        }
+
+        .contact-block {
+            margin-bottom: 30px;
+        }
+
+        .contact-block h4 {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 10px;
+        }
+
+        .contact-block p {
+            font-size: 1rem;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        .contact-block a {
+            color: var(--dark-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-block a:hover {
+            color: var(--accent);
+        }
+
+        .contact-map {
+            height: 400px;
+            overflow: hidden;
+        }
+
+        .contact-map iframe {
+            width: 100%;
+            height: 100%;
+            filter: grayscale(100%);
+            transition: filter 0.4s;
+        }
+
+        .contact-map:hover iframe {
+            filter: grayscale(0%);
+        }
+
+        /* FOOTER */
+        .footer {
+            padding: 60px;
+            border-top: 1px solid var(--mid-gray);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            font-family: var(--serif);
+            font-size: 1.2rem;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--mid-gray);
+            color: var(--dark-gray);
+            transition: all 0.3s;
+        }
+
+        .footer-social a:hover {
+            background: var(--black);
+            border-color: var(--black);
+            color: var(--white);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-grid,
+            .about-header,
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .hero-visual {
+                height: 400px;
+            }
+
+            .timeline {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .features-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 20px 30px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero,
+            .about,
+            .directory,
+            .features,
+            .cta,
+            .contact,
+            .footer {
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .timeline,
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-btns {
+                flex-direction: column;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <h1>Adams Arcade</h1>
+            <span>Est. 1952</span>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">Heritage</a></li>
+            <li><a href="#directory">Directory</a></li>
+            <li><a href="#features">Experience</a></li>
+            <li><a href="#contact">Visit</a></li>
+        </ul>
+        <a href="#contact" class="nav-cta">Get Directions</a>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-grid">
+            <div class="hero-content">
+                <p class="hero-tag">Kenya's First Shopping Centre</p>
+                <h2 class="hero-title">Where <em>heritage</em> meets modern living</h2>
+                <p class="hero-text">For over seven decades, Adams Arcade has been the heart of Nairobi's Kilimani community — a timeless destination where generations gather, shop, and connect.</p>
+                <div class="hero-btns">
+                    <a href="#directory" class="btn-primary">Explore Directory</a>
+                    <a href="#about" class="btn-secondary">Our Story</a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="hero-img-main">
+                    <img src="https://images.unsplash.com/photo-1604014237800-1c9102c219da?w=800&q=80" alt="Shopping arcade">
+                </div>
+                <div class="hero-img-accent">
+                    <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Cafe interior">
+                </div>
+                <div class="hero-badge">
+                    <span>Established</span>
+                    <strong>1952</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee">
+        <div class="marquee-track">
+            <span class="marquee-item">Java House</span>
+            <span class="marquee-item">Golis Restaurant</span>
+            <span class="marquee-item">Mudi's Cakes</span>
+            <span class="marquee-item">Total Petrol</span>
+            <span class="marquee-item">Posta Kenya</span>
+            <span class="marquee-item">Beko Appliances</span>
+            <span class="marquee-item">Sharp Vision</span>
+            <span class="marquee-item">Arcade Forex</span>
+            <span class="marquee-item">Java House</span>
+            <span class="marquee-item">Golis Restaurant</span>
+            <span class="marquee-item">Mudi's Cakes</span>
+            <span class="marquee-item">Total Petrol</span>
+            <span class="marquee-item">Posta Kenya</span>
+            <span class="marquee-item">Beko Appliances</span>
+            <span class="marquee-item">Sharp Vision</span>
+            <span class="marquee-item">Arcade Forex</span>
+        </div>
+    </div>
+
+    <!-- About -->
+    <section class="about" id="about">
+        <div class="about-header">
+            <h2 class="about-title">A living piece of Nairobi's history</h2>
+            <p class="about-intro">Named after its founders Adams and Archibald, Adams Arcade opened its doors in 1952, becoming Kenya's first purpose-built shopping centre. Today, it stands as a testament to enduring quality and community spirit.</p>
+        </div>
+        <div class="timeline">
+            <div class="tl-item">
+                <div class="tl-year">1952</div>
+                <h4 class="tl-title">Grand Opening</h4>
+                <p class="tl-text">Kenya's first shopping centre welcomes its inaugural visitors</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-year">1959</div>
+                <h4 class="tl-title">Posta Arrives</h4>
+                <p class="tl-text">Kenya Post establishes its branch, still operating today</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-year">1990s</div>
+                <h4 class="tl-title">Community Hub</h4>
+                <p class="tl-text">Becomes the beloved heart of Kilimani neighbourhood</p>
+            </div>
+            <div class="tl-item">
+                <div class="tl-year">Today</div>
+                <h4 class="tl-title">Modern Heritage</h4>
+                <p class="tl-text">40+ businesses serving a new generation of Nairobians</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Directory -->
+    <section class="directory" id="directory">
+        <div class="directory-inner">
+            <div class="section-header">
+                <p class="section-tag">What's Inside</p>
+                <h2 class="section-title">Explore Our Directory</h2>
+            </div>
+            <div class="dir-tabs">
+                <button class="dir-tab active">All</button>
+                <button class="dir-tab">Eateries</button>
+                <button class="dir-tab">Retail</button>
+                <button class="dir-tab">Services</button>
+            </div>
+            <div class="dir-grid">
+                <div class="dir-card">
+                    <div class="dir-card-img">
+                        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=600&q=80" alt="Java House">
+                    </div>
+                    <div class="dir-card-body">
+                        <span class="dir-card-tag">Café & Restaurant</span>
+                        <h3>Java House</h3>
+                        <p>Premium coffee and all-day dining</p>
+                    </div>
+                </div>
+                <div class="dir-card">
+                    <div class="dir-card-img">
+                        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=600&q=80" alt="Golis">
+                    </div>
+                    <div class="dir-card-body">
+                        <span class="dir-card-tag">Restaurant</span>
+                        <h3>Golis Restaurant</h3>
+                        <p>Authentic Somali cuisine</p>
+                    </div>
+                </div>
+                <div class="dir-card">
+                    <div class="dir-card-img">
+                        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="Bakery">
+                    </div>
+                    <div class="dir-card-body">
+                        <span class="dir-card-tag">Bakery</span>
+                        <h3>Mudi's Cakes</h3>
+                        <p>Artisan cakes and pastries</p>
+                    </div>
+                </div>
+                <div class="dir-card">
+                    <div class="dir-card-img">
+                        <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=600&q=80" alt="Retail">
+                    </div>
+                    <div class="dir-card-body">
+                        <span class="dir-card-tag">Appliances</span>
+                        <h3>Beko</h3>
+                        <p>Quality home appliances</p>
+                    </div>
+                </div>
+                <div class="dir-card">
+                    <div class="dir-card-img">
+                        <img src="https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80" alt="Vision">
+                    </div>
+                    <div class="dir-card-body">
+                        <span class="dir-card-tag">Optical</span>
+                        <h3>Sharp Vision</h3>
+                        <p>Eye care and designer frames</p>
+                    </div>
+                </div>
+                <div class="dir-card">
+                    <div class="dir-card-img">
+                        <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80" alt="Post Office">
+                    </div>
+                    <div class="dir-card-body">
+                        <span class="dir-card-tag">Heritage Tenant • Since 1959</span>
+                        <h3>Posta Kenya</h3>
+                        <p>Postal and courier services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+        <div class="features-grid">
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <h3>Ample Parking</h3>
+                <p>Convenient parking space available for all visitors throughout the day</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-shield-halved"></i>
+                </div>
+                <h3>24/7 Security</h3>
+                <p>Professional security ensuring a safe shopping environment</p>
+            </div>
+            <div class="feature">
+                <div class="feature-icon">
+                    <i class="fas fa-location-dot"></i>
+                </div>
+                <h3>Prime Location</h3>
+                <p>Centrally located in Kilimani, easily accessible from all areas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+        <h2 class="cta-title">Join Our Community</h2>
+        <p class="cta-text">Interested in leasing space at Kenya's most historic shopping destination?</p>
+        <a href="mailto:info@adamsarcade.co.ke" class="btn-primary">Inquire About Leasing</a>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Come Visit Us</h2>
+                <div class="contact-block">
+                    <h4>Address</h4>
+                    <p>Adams Arcade Shopping Centre<br>Ngong Road, Kilimani<br>Nairobi, Kenya</p>
+                </div>
+                <div class="contact-block">
+                    <h4>Hours</h4>
+                    <p>Monday – Saturday: 8am – 8pm<br>Sunday: 9am – 6pm</p>
+                </div>
+                <div class="contact-block">
+                    <h4>Contact</h4>
+                    <p><a href="mailto:info@adamsarcade.co.ke">info@adamsarcade.co.ke</a></p>
+                </div>
+            </div>
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.817694!2d36.7789!3d-1.2921!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2sAdams%20Arcade!5e0!3m2!1sen!2ske!4v1234567890" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">Adams Arcade</div>
+            <p class="footer-copy">2026 Adams Arcade. Kenya's First Shopping Centre Since 1952.</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            document.querySelector('.nav').classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Tab functionality
+        document.querySelectorAll('.dir-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.dir-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+    </script>
+</body>
+</html>
